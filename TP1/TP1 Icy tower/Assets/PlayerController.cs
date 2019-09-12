@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -11,12 +12,14 @@ public class PlayerController : MonoBehaviour {
     private bool m_canJump;
     public float x_speed;
     public float z_speed;
+    Scene scene;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>(); //prend les composant du rigidBody du joueur et les mets dans rb
         rb.freezeRotation = true; // empêche le cube de tourne
-        m_canJump = false; 
+        m_canJump = false;
+        scene = SceneManager.GetActiveScene();
 
     }
 
@@ -34,20 +37,6 @@ public class PlayerController : MonoBehaviour {
 
         velocity = transform.InverseTransformDirection(rb.velocity);//prend les valeurs de la velocité global et les mets local
 
-        //mouvement du joueur en z
-        /*if (Input.GetKey(KeyCode.W))
-        {
-            velocity.z = z_speed;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            velocity.z = -z_speed;
-        }
-        else
-        {
-            velocity.z = 0f;
-        }*/
-
         //mouvement du joueur en x
         if (Input.GetKey(KeyCode.D))
         {
@@ -61,6 +50,7 @@ public class PlayerController : MonoBehaviour {
         {
             velocity.x = 0f;
         }
+
         //permet de savoir si un joueur peut re-sauter
         if (m_canJump && Input.GetKeyDown(KeyCode.Space))
         {
@@ -68,9 +58,22 @@ public class PlayerController : MonoBehaviour {
             m_canJump = false;
         }
         rb.velocity = transform.TransformDirection(velocity);
+
+        if(transform.position.y <= 0)
+        {
+            SceneManager.LoadScene(scene.name);
+        }
     }
+    //fonction qui définit se qui se passe lors d'une collision
     private void OnCollisionEnter(Collision collision)
     {
-        m_canJump = true;
+        if(collision.gameObject.tag == "Floor")
+        {
+            m_canJump = true;
+        }
+        if(collision.gameObject.tag == "Danger")
+        {
+            SceneManager.LoadScene(scene.name);
+        }
     }
 }
