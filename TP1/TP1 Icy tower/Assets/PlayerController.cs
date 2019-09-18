@@ -9,16 +9,16 @@ public class PlayerController : MonoBehaviour {
     public float turnSpeed = 10f;
 	Vector3 velocity;
     public float jumpSpeed = 200f;
-    private bool m_canJump;
     public float x_speed;
     public float z_speed;
     Scene scene;
+    RaycastHit hit;
+    public Camera a;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>(); //prend les composant du rigidBody du joueur et les mets dans rb
         rb.freezeRotation = true; // empêche le cube de tourne
-        m_canJump = false;
         scene = SceneManager.GetActiveScene();
 
     }
@@ -51,27 +51,33 @@ public class PlayerController : MonoBehaviour {
             velocity.x = 0f;
         }
 
-        //permet de savoir si un joueur peut re-sauter
-        if (m_canJump && Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(0, jumpSpeed, 0);// addForce donne un coup vers une position
-            m_canJump = false;
-        }
         rb.velocity = transform.TransformDirection(velocity);
 
-        if(transform.position.y <= 0)
+        if (transform.position.y <= 0)
         {
             SceneManager.LoadScene(scene.name);
         }
-    }
-    //fonction qui définit se qui se passe lors d'une collision
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Floor")
+        if (a.ViewportToWorldPoint(new Vector3(1, transform.position.y, transform.position.z)).x > transform.position.x)
         {
-            m_canJump = true;
+            Debug.Log("droite");
         }
-        if(collision.gameObject.tag == "Danger")
+        if (a.ViewportToWorldPoint(new Vector3(0, transform.position.y, transform.position.z)).x < transform.position.x)
+        {
+            Debug.Log("gauche");
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        //sequence qui définie la réaction du joueur au contact des objets
+        LayerMask mask_Floor = LayerMask.GetMask("Floor");
+        LayerMask mask_Danger = LayerMask.GetMask("Danger");
+        
+        if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(0, jumpSpeed, 0);// addForce donne un coup vers une position
+        }
+        if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Danger))
         {
             SceneManager.LoadScene(scene.name);
         }

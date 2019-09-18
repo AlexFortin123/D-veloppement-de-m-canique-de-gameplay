@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3212013931660511378}
   - component: {fileID: 3212013931660511379}
   - component: {fileID: 3212013931660511376}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Longue_plateForme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 3212013932788395535}
   - component: {fileID: 3212013932788395532}
   - component: {fileID: 3212013932788395533}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Floor
   m_Icon: {fileID: 0}

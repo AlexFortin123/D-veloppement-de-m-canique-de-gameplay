@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6794339598044095895}
   - component: {fileID: 1020805366307599503}
   - component: {fileID: 8641264877485250216}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane (1)
   m_TagString: Danger
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4833900750736999797}
   - component: {fileID: 4833900750736999794}
   - component: {fileID: 4833900750736999795}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plateforme_danger
   m_TagString: Danger
   m_Icon: {fileID: 0}
