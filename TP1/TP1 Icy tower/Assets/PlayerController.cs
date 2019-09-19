@@ -8,19 +8,19 @@ public class PlayerController : MonoBehaviour {
 	public Rigidbody rb;
     public float turnSpeed = 10f;
 	Vector3 velocity;
+    Vector3 newPos;
     public float jumpSpeed = 200f;
     public float x_speed;
     public float z_speed;
     Scene scene;
     RaycastHit hit;
-    public Camera a;
+    public Camera m_camera;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>(); //prend les composant du rigidBody du joueur et les mets dans rb
         rb.freezeRotation = true; // empêche le cube de tourne
         scene = SceneManager.GetActiveScene();
-
     }
 
     // Update is called once per frame
@@ -57,14 +57,17 @@ public class PlayerController : MonoBehaviour {
         {
             SceneManager.LoadScene(scene.name);
         }
-        if (a.ViewportToWorldPoint(new Vector3(1, transform.position.y, transform.position.z)).x > transform.position.x)
+        newPos = transform.position;
+        //si le joueur sort de la vue de ma camera, il revien de l'autre côter, (0,0) en bas a gauche et (1,1) en haut a droite
+        if (m_camera.WorldToViewportPoint(transform.position).x <= 0)
         {
-            Debug.Log("droite");
+            newPos.x = m_camera.WorldToViewportPoint(transform.position).x;
         }
-        if (a.ViewportToWorldPoint(new Vector3(0, transform.position.y, transform.position.z)).x < transform.position.x)
+        if (m_camera.WorldToViewportPoint(transform.position).x >= 1)
         {
-            Debug.Log("gauche");
+            
         }
+        transform.position = newPos;
     }
 
     private void FixedUpdate()
@@ -75,7 +78,7 @@ public class PlayerController : MonoBehaviour {
         
         if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(0, jumpSpeed, 0);// addForce donne un coup vers une position
+            rb.AddForce(0, jumpSpeed, 0);// donne un coup vers une position
         }
         if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Danger))
         {
