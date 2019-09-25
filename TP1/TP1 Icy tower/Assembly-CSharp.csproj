@@ -61,8 +61,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AurynSky\Desert Pack\Scripts\ChestDemo.cs" />
+    <Compile Include="Assets\AurynSky\Desert Pack\Scripts\MaterialMover.cs" />
+    <Compile Include="Assets\AurynSky\Desert Pack\Scripts\Rotator.cs" />
     <Compile Include="Assets\MouvementCamera.cs" />
     <Compile Include="Assets\PlayerController.cs" />
+    <None Include="Assets\Fantasy Forest Environment Free Sample\StandardNoCulling.shader" />
+    <None Include="Assets\AurynSky\Desert Pack\READ ME.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/1930142/Desktop/Nouveau dossier/D-veloppement-de-m-canique-de-gameplay/TP1/TP1 Icy tower/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

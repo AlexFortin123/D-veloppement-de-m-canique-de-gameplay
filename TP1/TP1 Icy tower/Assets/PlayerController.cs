@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>(); //prend les composant du rigidBody du joueur et les mets dans rb
         rb.freezeRotation = true; // empêche le cube de tourne
         scene = SceneManager.GetActiveScene();
+        newPos = new Vector3();
     }
 
     // Update is called once per frame
@@ -53,36 +54,42 @@ public class PlayerController : MonoBehaviour {
 
         rb.velocity = transform.TransformDirection(velocity);
 
-        if (transform.position.y <= 0)
-        {
-            SceneManager.LoadScene(scene.name);
-        }
         newPos = transform.position;
         //si le joueur sort de la vue de ma camera, il revien de l'autre côter, (0,0) en bas a gauche et (1,1) en haut a droite
         if (m_camera.WorldToViewportPoint(transform.position).x <= 0)
         {
-            newPos.x = m_camera.WorldToViewportPoint(transform.position).x;
+            newPos.x = m_camera.transform.position.x + 15f;
         }
         if (m_camera.WorldToViewportPoint(transform.position).x >= 1)
         {
-            
+            newPos.x = m_camera.transform.position.x - 15f;
         }
         transform.position = newPos;
-    }
 
-    private void FixedUpdate()
-    {
         //sequence qui définie la réaction du joueur au contact des objets
         LayerMask mask_Floor = LayerMask.GetMask("Floor");
         LayerMask mask_Danger = LayerMask.GetMask("Danger");
-        
-        if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
+
+        if ((Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space)) ||
+            Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space) ||
+            Physics.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(0, jumpSpeed, 0);// donne un coup vers une position
         }
-        if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Danger))
+        if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Danger) ||
+            Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Danger) ||
+            Physics.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out hit, 0.5f, mask_Danger))
         {
             SceneManager.LoadScene(scene.name);
         }
+        //si le joueur sort de l'écran vers le bas, il meurt et je jeu recommence
+        if (m_camera.WorldToViewportPoint(transform.position).y <= 0)
+        {
+            SceneManager.LoadScene(scene.name);
+        }
+    }
+    private void FixedUpdate()
+    {
+        
     }
 }
