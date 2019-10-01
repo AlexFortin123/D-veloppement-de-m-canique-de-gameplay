@@ -15,20 +15,23 @@ public class MouvementCamera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         newPos = transform.position;
-        if(cam.WorldToViewportPoint(joueur.transform.position).y >= 0.75)
+        if(transform.position.y < 65.42f)
         {
-            if(cam.WorldToViewportPoint(joueur.transform.position).y >= 0.50f)
+            if (cam.WorldToViewportPoint(joueur.transform.position).y >= 0.75)
             {
-                cam_speed = 0.05f;
+                if (cam.WorldToViewportPoint(joueur.transform.position).y >= 0.50f)
+                {
+                    cam_speed = 0.05f;
+                    newPos.y = newPos.y + cam_speed;
+                    transform.position = newPos;
+                }
+            }
+            else
+            {
+                cam_speed = 0.01f;
                 newPos.y = newPos.y + cam_speed;
                 transform.position = newPos;
             }
-        }
-        else
-        {
-            cam_speed = 0.01f;
-            newPos.y = newPos.y + cam_speed;
-            transform.position = newPos;
         }
     }
 }

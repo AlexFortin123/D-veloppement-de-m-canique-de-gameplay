@@ -82,6 +82,18 @@ public class PlayerController : MonoBehaviour {
         {
             SceneManager.LoadScene(scene.name);
         }
+        if (Physics.Raycast(transform.position, new Vector3(1f, 0f, 0f), out hit, 0.5f, mask_Danger) ||
+            Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Vector3(1f, 0f, 0f), out hit, 0.5f, mask_Danger) ||
+            Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), new Vector3(1f, 0f, 0f), out hit, 0.5f, mask_Danger))
+        {
+            SceneManager.LoadScene(scene.name);
+        }
+        if (Physics.Raycast(transform.position, new Vector3(-1f, 0f, 0f), out hit, 0.5f, mask_Danger) ||
+            Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), new Vector3(-1f, 0f, 0f), out hit, 0.5f, mask_Danger) ||
+            Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), new Vector3(-1f, 0f, 0f), out hit, 0.5f, mask_Danger))
+        {
+            SceneManager.LoadScene(scene.name);
+        }
         //si le joueur sort de l'écran vers le bas, il meurt et je jeu recommence
         if (m_camera.WorldToViewportPoint(transform.position).y <= 0)
         {

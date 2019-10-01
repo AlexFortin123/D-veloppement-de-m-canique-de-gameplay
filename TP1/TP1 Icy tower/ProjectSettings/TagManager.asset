@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Danger
+  - player
   layers:
   - Default
   - TransparentFX
