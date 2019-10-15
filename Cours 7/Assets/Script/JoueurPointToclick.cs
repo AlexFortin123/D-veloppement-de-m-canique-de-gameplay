@@ -5,7 +5,9 @@ using UnityEngine;
 public class JoueurPointToclick : MonoBehaviour
 {
     public Camera m_camera;
-    public GameObject m_Prefad;
+    //public GameObject m_Prefad;
+    private NavMeshAgent agent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,8 @@ public class JoueurPointToclick : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit))
             {
-                GameObject.Instantiate(m_Prefad, hit.point, Quaternion.identity);//besoin d'un collider
+                Vector3 newTargetGetPos = hit.point;
+                agent.SetDestination(newTargetGetPos);
             }
         }
     }
