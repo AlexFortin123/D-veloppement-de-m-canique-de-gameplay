@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ennemy
+  - Red
+  - Blue
   layers:
   - Default
   - TransparentFX
@@ -15,10 +16,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - Floor
-  - 
-  - 
-  - 
+  - Player
+  - BlueCoins
+  - RedCoins
+  - Plateforme
   - 
   - 
   - 
