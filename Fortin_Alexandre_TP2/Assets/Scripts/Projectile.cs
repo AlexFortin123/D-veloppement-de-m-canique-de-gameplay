@@ -6,8 +6,12 @@ public class Projectile : MonoBehaviour
 {
     public float m_Speed;
     public GameObject m_Tireur;
+    private Camera m_Camera;
     private Vector3 m_Pos;
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        m_Camera = Camera.main;
+    }
     void Start()
     {
         
@@ -20,7 +24,17 @@ public class Projectile : MonoBehaviour
         m_Pos.z += m_Speed;
         transform.position = m_Pos;
         
-        if(Vector3.Distance(m_Tireur.transform.position, transform.position) > 50f)
+        if(m_Camera.WorldToViewportPoint(transform.position).y >= 1 || m_Camera.WorldToViewportPoint(transform.position).y <= 0 
+           || m_Camera.WorldToViewportPoint(transform.position).x >= 1 || m_Camera.WorldToViewportPoint(transform.position).x <= 0)
+        {
+            Destroy(gameObject);
+        }
+       
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("allo");
+        if(collision.gameObject.tag == "Ennemy")
         {
             Destroy(gameObject);
         }
