@@ -5,9 +5,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float m_Speed;
-    public GameObject m_Tireur;
     private Camera m_Camera;
-    private Vector3 m_Pos;
+    public Rigidbody m_rigidBody;
+
     private void Awake()
     {
         m_Camera = Camera.main;
@@ -20,9 +20,6 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_Pos = transform.position;
-        m_Pos.z += m_Speed;
-        transform.position = m_Pos;
         
         if(m_Camera.WorldToViewportPoint(transform.position).y >= 1 || m_Camera.WorldToViewportPoint(transform.position).y <= 0 
            || m_Camera.WorldToViewportPoint(transform.position).x >= 1 || m_Camera.WorldToViewportPoint(transform.position).x <= 0)
@@ -33,7 +30,6 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("allo");
         if(collision.gameObject.tag == "Ennemy")
         {
             Destroy(gameObject);

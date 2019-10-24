@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4585425428889688132}
   - component: {fileID: 120853482465743802}
   - component: {fileID: 3933040759905081429}
-  m_Layer: 0
+  - component: {fileID: 8675270820969509607}
+  m_Layer: 11
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +106,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd12735226be58b48932cb8d7b683118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 0.2
-  m_Tireur: {fileID: 1819740324890060747, guid: d37054064d705b74bb27fe442db6fb04,
-    type: 3}
+  m_Speed: 10
+  m_rigidBody: {fileID: 8675270820969509607}
+--- !u!54 &8675270820969509607
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357133893275862981}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0

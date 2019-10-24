@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ennemy
   - Floor
+  - Bullet
+  - Levier
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -18,12 +21,12 @@ TagManager:
   - PostProcessing
   - Floor
   - Clickable
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Bullet
+  - Player
+  - Ennemy
+  - Wall
+  - Porte
+  - Levier
   - 
   - 
   - 

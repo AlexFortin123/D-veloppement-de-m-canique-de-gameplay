@@ -28,19 +28,21 @@ using UnityEngine;
         {
             if (Physics.Raycast(ray, out hit, 100))
             {
+                transform.LookAt(hit.point);
                 if (hit.collider.tag == "Ennemy")
                 {
-                    GameObject projectileGameObject = GameObject.Instantiate(m_Balle, transform.position + Vector3.forward, Quaternion.identity);
-                    Projectile projectile = projectileGameObject.GetComponent<Projectile>();
-                    projectile.m_Tireur = gameObject;
+                    GameObject projectileGameObject = GameObject.Instantiate(m_Balle, transform.position, Quaternion.identity);
+                    projectileGameObject.transform.rotation = transform.rotation;
+                    projectileGameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
                 }
             }
         }
         if (Input.GetMouseButton(0))
         {
-            if (Physics.Raycast(ray, out hit, 100, LayerMask.GetMask("Clickable")))
+            if (Physics.Raycast(ray, out hit, 100))
             {
-                if (hit.collider.tag == "Floor")
+                transform.LookAt(hit.point);
+                if (hit.collider.tag == "Floor"|| hit.collider.tag == "Levier")
                 {
                     m_Distance = Vector3.Distance(transform.position, hit.point);
                     m_Speed = m_Distance / 20f;
