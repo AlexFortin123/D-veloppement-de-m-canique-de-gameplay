@@ -10,28 +10,29 @@ public class EnnemisController : MonoBehaviour
     public float m_Speed;
     public GameObject m_balleEnnemy;
     public int m_WaitingTimeShoot;
+    public bool m_PlayerDetected;
 
     private Vector3 m_StartingPos;
     private int index;
     private float m_Pourcentage;
-    private GameObject m_zone;
-    private DetectionzoneController m_DetecteZone;
     private float timer;
+    private Transform m_TransformTarget;
+    
+
 
     private void Awake()
     {
         index = 1;
         m_Pourcentage = 0f;
         m_StartingPos = transform.position;
-        m_zone = GameObject.Instantiate(m_DetectZonePlayer, gameObject.transform.position, Quaternion.identity);
-        m_zone.transform.SetParent(this.transform);
-        m_DetecteZone = m_zone.GetComponent<DetectionzoneController>();
+        m_PlayerDetected = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!m_DetecteZone.m_ObjectDetected)
+        if (!m_PlayerDetected)
         {
             transform.position = Vector3.Lerp(m_StartingPos, m_NoeudPartrouille[index].transform.position, m_Pourcentage);
             if (m_Pourcentage >= 1)
@@ -48,16 +49,15 @@ public class EnnemisController : MonoBehaviour
         }
         else
         {
-            Debug.Log(m_DetecteZone.transform.position);
             timer += Time.deltaTime;
-            if(timer > m_WaitingTimeShoot)
+            transform.LookAt(m_TransformTarget);
+            if (timer > m_WaitingTimeShoot)
             {
                 GameObject projectileGameObject = GameObject.Instantiate(m_balleEnnemy, transform.position + 2f * Vector3.forward, Quaternion.identity);
                 projectileGameObject.transform.rotation = transform.rotation;
                 projectileGameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_DetecteZone.transform.position - transform.position),
-                    3f * Time.deltaTime);
                 timer = 0;
+
             }
             transform.position += transform.forward * Time.deltaTime;
         }
@@ -72,6 +72,12 @@ public class EnnemisController : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        
     }
-   
+    //
+    public void ManageTargetTransform(Transform aTransformTarget)
+    {
+        m_TransformTarget = aTransformTarget;
+    }
+
 }

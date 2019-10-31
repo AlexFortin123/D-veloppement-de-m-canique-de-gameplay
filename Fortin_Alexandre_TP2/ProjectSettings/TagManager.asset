@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Levier
   - Wall
+  - Bullet_Ennemy
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - 
   - Floor
-  - 
+  - Bullet_Ennemy
   - Bullet
   - Player
   - Ennemy
