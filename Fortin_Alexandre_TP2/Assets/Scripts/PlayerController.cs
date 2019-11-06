@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        m_Percentage = 2f * Time.deltaTime;
         scene = SceneManager.GetActiveScene();
     }
     // Update is called once per frame

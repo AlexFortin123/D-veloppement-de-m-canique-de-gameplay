@@ -9,26 +9,24 @@ public class Projectile : MonoBehaviour
     public string m_BulletObjectCollideDestroyNameTag;
 
     private Camera m_Camera;
+    private float m_TimerBeforeDissapear;
 
     private void Awake()
     {
         m_Camera = Camera.main;
+        m_TimerBeforeDissapear = 2f;
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
-        if(m_Camera.WorldToViewportPoint(transform.position).y >= 1 || m_Camera.WorldToViewportPoint(transform.position).y <= 0 
-           || m_Camera.WorldToViewportPoint(transform.position).x >= 1 || m_Camera.WorldToViewportPoint(transform.position).x <= 0)
+        if(m_TimerBeforeDissapear < 0)
         {
             Destroy(gameObject);
         }
-       
+        m_TimerBeforeDissapear -= Time.deltaTime;
+
+
     }
     private void OnCollisionEnter(Collision collision)
     {

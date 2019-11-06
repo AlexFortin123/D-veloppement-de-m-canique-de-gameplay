@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8560487755456132480}
   - component: {fileID: 8560487755456132495}
   - component: {fileID: 8560487755456132494}
-  m_Layer: 14
+  m_Layer: 2
   m_Name: Porte
   m_TagString: Untagged
   m_Icon: {fileID: 0}

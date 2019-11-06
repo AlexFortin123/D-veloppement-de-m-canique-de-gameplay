@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ennemy
-  - Floor
-  - Bullet
-  - Levier
-  - Wall
-  - Bullet_Ennemy
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -19,16 +13,16 @@ TagManager:
   - UI
   - 
   - 
+  - PostProcessing
+  - Ground
   - 
-  - Floor
-  - Bullet_Ennemy
-  - Bullet
-  - Player
-  - Ennemy
   - 
-  - Porte
-  - Levier
-  - EnnemyDetection
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

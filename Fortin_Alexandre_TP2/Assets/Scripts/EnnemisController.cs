@@ -58,11 +58,10 @@ public class EnnemisController : MonoBehaviour
             transform.LookAt(m_TransformTarget);
             if (timer > m_WaitingTimeShoot)
             {
-                GameObject projectileGameObject = GameObject.Instantiate(m_balleEnnemy, transform.position + 2f * Vector3.forward, Quaternion.identity);
+                GameObject projectileGameObject = GameObject.Instantiate(m_balleEnnemy, transform.position  + Vector3.forward, Quaternion.identity);
                 projectileGameObject.transform.rotation = transform.rotation;
                 projectileGameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
                 timer = 0;
-
             }
             if(m_CanMove)
             {

@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 1258079093760891009}
   - component: {fileID: 1258079093760891008}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: CorpsInvisible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Hp: 2
   m_NoeudPartrouille: []
   m_DetectZonePlayer: {fileID: 0}
-  m_Speed: 0.2
+  m_Speed: 2
   m_balleEnnemy: {fileID: 4179028540937451503, guid: ee50e6b637adf0d4fbe8f0c8bd23c7e2,
     type: 3}
   m_WaitingTimeShoot: 1
