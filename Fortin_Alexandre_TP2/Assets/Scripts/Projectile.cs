@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public float m_Speed;
     public Rigidbody m_rigidBody;
     public string m_BulletObjectCollideDestroyNameTag;
+
     private Camera m_Camera;
 
     private void Awake()

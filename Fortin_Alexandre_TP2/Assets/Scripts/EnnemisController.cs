@@ -11,12 +11,14 @@ public class EnnemisController : MonoBehaviour
     public GameObject m_balleEnnemy;
     public int m_WaitingTimeShoot;
     public bool m_PlayerDetected;
+    public bool m_CanMove;
 
     private Vector3 m_StartingPos;
     private int index;
     private float m_Pourcentage;
     private float timer;
     private Transform m_TransformTarget;
+    
     
 
 
@@ -26,7 +28,6 @@ public class EnnemisController : MonoBehaviour
         m_Pourcentage = 0f;
         m_StartingPos = transform.position;
         m_PlayerDetected = false;
-
     }
 
     // Update is called once per frame
@@ -34,18 +35,22 @@ public class EnnemisController : MonoBehaviour
     {
         if (!m_PlayerDetected)
         {
-            transform.position = Vector3.Lerp(m_StartingPos, m_NoeudPartrouille[index].transform.position, m_Pourcentage);
-            if (m_Pourcentage >= 1)
+            if(m_NoeudPartrouille.Count != 0)
             {
-                index++;
-                m_Pourcentage = 0;
-                m_StartingPos = transform.position;
+                transform.position = Vector3.Lerp(m_StartingPos, m_NoeudPartrouille[index].transform.position, m_Pourcentage);
+                if (m_Pourcentage >= 1)
+                {
+                    index++;
+                    m_Pourcentage = 0;
+                    m_StartingPos = transform.position;
+                }
+                if (index >= m_NoeudPartrouille.Count)
+                {
+                    index = 0;
+                }
+                m_Pourcentage += m_Speed * Time.deltaTime; //Permet de rendre constant le pourcentage
             }
-            if (index >= m_NoeudPartrouille.Count)
-            {
-                index = 0;
-            }
-            m_Pourcentage += m_Speed * Time.deltaTime; //Permet de rendre constant le pourcentage
+            
         }
         else
         {
@@ -59,7 +64,10 @@ public class EnnemisController : MonoBehaviour
                 timer = 0;
 
             }
-            transform.position += transform.forward * Time.deltaTime;
+            if(m_CanMove)
+            {
+                transform.position += transform.forward * Time.deltaTime;
+            }
         }
     }
     private void OnCollisionEnter(Collision collision)
