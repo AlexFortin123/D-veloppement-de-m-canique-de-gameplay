@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 1, z: 5}
+  m_Size: {x: 7, y: 1, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1258079093347719299
 MonoBehaviour:
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Hp: 2
   m_NoeudPartrouille: []
   m_DetectZonePlayer: {fileID: 0}
-  m_Speed: 2
+  m_Speed: 3
   m_balleEnnemy: {fileID: 4179028540937451503, guid: ee50e6b637adf0d4fbe8f0c8bd23c7e2,
     type: 3}
   m_WaitingTimeShoot: 1

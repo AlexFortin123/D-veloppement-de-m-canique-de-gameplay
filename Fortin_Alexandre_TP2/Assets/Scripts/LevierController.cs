@@ -12,9 +12,21 @@ public class LevierController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        //Vector3.down
         if(collision.gameObject.tag == "Player")
         {
-            Destroy(m_Porte);
+            StartCoroutine("CloseDoor");
         }
+    }
+
+    IEnumerator CloseDoor()
+    {
+        while(m_Porte.transform.position.y > -5f)
+        {
+            m_Porte.transform.Translate(Vector3.down * Time.deltaTime);
+            yield return null;
+        }
+        Destroy(m_Porte);
+        yield return null;
     }
 }

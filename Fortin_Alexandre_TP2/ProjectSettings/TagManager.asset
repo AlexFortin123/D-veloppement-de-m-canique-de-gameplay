@@ -10,6 +10,8 @@ TagManager:
   - Levier
   - Wall
   - Bullet_Ennemy
+  - Totem
+  - MinimapCamera
   layers:
   - Default
   - TransparentFX
