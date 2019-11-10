@@ -14,6 +14,7 @@ public class EnnemisController : MonoBehaviour
     public bool m_CanMove;
 
     private Vector3 m_StartingPos;
+    private float m_Distance;
     private int index;
     private float m_Pourcentage;
     private float timer;
@@ -37,6 +38,7 @@ public class EnnemisController : MonoBehaviour
         {
             if(m_NoeudPartrouille.Count != 0)
             {
+                //m_Distance = Vector3.Distance(transform.position, m_NoeudPartrouille[index].transform.position);
                 transform.position = Vector3.Lerp(m_StartingPos, m_NoeudPartrouille[index].transform.position, m_Pourcentage);
                 if (m_Pourcentage >= 1)
                 {
@@ -65,7 +67,18 @@ public class EnnemisController : MonoBehaviour
             }
             if(m_CanMove)
             {
-                transform.position += transform.forward * Time.deltaTime;
+                transform.position = Vector3.Lerp(m_StartingPos, m_TransformTarget.position, m_Pourcentage);
+                if (m_Pourcentage >= 1)
+                {
+                    index++;
+                    m_Pourcentage = 0;
+                    m_StartingPos = transform.position;
+                }
+                if (index >= m_NoeudPartrouille.Count)
+                {
+                    index = 0;
+                }
+                m_Pourcentage += m_Speed * Time.deltaTime; //Permet de rendre constant le pourcentage
             }
         }
     }
