@@ -16,6 +16,7 @@ public class LevierController : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             StartCoroutine("CloseDoor");
+            this.GetComponent<Renderer>().material.color = Color.green;
         }
     }
 

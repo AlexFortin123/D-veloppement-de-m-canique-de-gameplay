@@ -67,7 +67,8 @@ public class EnnemisController : MonoBehaviour
             }
             if(m_CanMove)
             {
-                transform.position = Vector3.Lerp(m_StartingPos, m_TransformTarget.position, m_Pourcentage);
+                float distance = Vector3.Distance(m_StartingPos, m_TransformTarget.position);
+                transform.position = Vector3.Lerp(m_StartingPos, m_TransformTarget.position, m_Pourcentage / distance);
                 if (m_Pourcentage >= 1)
                 {
                     index++;

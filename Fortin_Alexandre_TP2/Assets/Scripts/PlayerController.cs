@@ -46,9 +46,6 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, 100))
             {
-                //Vector3 lookPosition = hit.point
-                //lookposition.y = transform.position.y
-                //transform.lookAt(hit.point, Vector3.up)
                 transform.LookAt(hit.point);
                 if (hit.collider.tag == "Floor"|| hit.collider.tag == "Levier")
                 {

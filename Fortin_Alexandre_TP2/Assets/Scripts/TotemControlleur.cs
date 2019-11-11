@@ -6,29 +6,21 @@ public class TotemControlleur : MonoBehaviour
 {
     public Transform m_DepartRayCast;
     public Transform m_FinRayCast;
+    public bool m_Activated;
 
     private LineRenderer m_lineRenderer;
-    private bool m_DrawRayCast;
     // Update is called once per frame
     private void Awake()
     {
     }
     void Update()
     {
-        if(m_DrawRayCast == true)
+        if(m_Activated)
         {
             m_lineRenderer = this.gameObject.AddComponent<LineRenderer>();
             m_lineRenderer.SetPosition(0, m_DepartRayCast.position);
             m_lineRenderer.SetPosition(1, m_FinRayCast.position);
-            m_DrawRayCast = false;
-        }
-    }
-    
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            m_DrawRayCast = true;
+            m_Activated = false;
         }
     }
 }
