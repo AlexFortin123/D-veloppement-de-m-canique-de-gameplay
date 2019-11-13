@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Speed: 10
   m_rigidBody: {fileID: 5576778346672438829}
   m_BulletObjectCollideDestroyNameTag: Player
+  m_BulletObjectCollideDestroyNameTag2: Ignore Raycast

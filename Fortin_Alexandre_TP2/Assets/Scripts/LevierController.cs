@@ -10,14 +10,20 @@ public class LevierController : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        //Vector3.down
-        if(collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             StartCoroutine("CloseDoor");
             this.GetComponent<Renderer>().material.color = Color.green;
+            Destroy(gameObject.GetComponent<BoxCollider>());
+
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     IEnumerator CloseDoor()

@@ -23,8 +23,9 @@ public class Cinematic : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            m_CameraFollow.m_NewPosCinematic =  m_TransformNewPosCamera.position;
+            m_CameraFollow.m_NewTranformCinematic = m_TransformNewPosCamera;
             m_CameraFollow.m_CanMouveWithPlayer = false;
+            m_CameraFollow.m_InitialPositionCamera = m_MainCamera.transform;
         }
     }
 }

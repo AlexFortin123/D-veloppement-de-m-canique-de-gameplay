@@ -9,12 +9,15 @@ public class CameraFollow : MonoBehaviour
     public Transform m_BordureMapGauche;
     public Transform m_BordureMapHaut;
     public Transform m_BordureMapBas;
-    public Vector3 m_NewPosCinematic;
+    public Transform m_NewTranformCinematic;
+    public Transform m_InitialPositionCamera;
     public bool m_CanMouveWithPlayer;
 
     private Vector3 m_NewPos;
+    private Vector3 m_PositionPlayer;
     private float m_Pourcentage;
     private bool m_BackToInitialPosition;
+    private Quaternion m_QuaternionInitialCamera;
     
 
     private void Awake()
@@ -22,6 +25,7 @@ public class CameraFollow : MonoBehaviour
         m_CanMouveWithPlayer = true;
         m_Pourcentage = 0f;
         m_BackToInitialPosition = false;
+        m_QuaternionInitialCamera = transform.rotation;
     }
     void Update()
     {
@@ -43,31 +47,30 @@ public class CameraFollow : MonoBehaviour
             }
             else
             {
-                float distance;
                 if(!m_BackToInitialPosition)
                 {
-                    distance = Vector3.Distance(transform.position, m_NewPosCinematic);
-                    transform.position = Vector3.Lerp(transform.position, m_NewPosCinematic, m_Pourcentage / distance);
-                    if (m_Pourcentage >= 100)
+                    transform.position = Vector3.Lerp(m_InitialPositionCamera.position, m_NewTranformCinematic.position, m_Pourcentage);
+                    transform.rotation = Quaternion.Lerp(m_InitialPositionCamera.rotation, m_NewTranformCinematic.rotation, m_Pourcentage);
+                    m_Pourcentage += 0.3f * Time.deltaTime;
+                    if (m_Pourcentage >= 1f)
                     {
                         m_BackToInitialPosition = true;
                         m_Pourcentage = 0;
+                        m_PositionPlayer = new Vector3(m_Player.transform.position.x,
+                        m_Player.transform.position.y + 12f, m_Player.transform.position.z - 12f);
                     }
-                    m_Pourcentage += 30f * Time.deltaTime;
                 }
                 else
                 {
-                    //m_Pourcentage = 0;
-                    distance = Vector3.Distance(transform.position, m_NewPosCinematic);
-                    transform.position = Vector3.Lerp(transform.position, new Vector3(m_Player.transform.position.x,
-                        m_Player.transform.position.y + 12f, m_Player.transform.position.z - 12f), m_Pourcentage / distance);
-                    if (m_Pourcentage >= 100)
+                    transform.position = Vector3.Lerp(m_NewTranformCinematic.position, m_PositionPlayer, m_Pourcentage);
+                    transform.rotation = Quaternion.Lerp(m_NewTranformCinematic.rotation, m_QuaternionInitialCamera, m_Pourcentage);
+                    m_Pourcentage += 0.3f * Time.deltaTime;
+                    if (m_Pourcentage >= 1f)
                     {
                         m_CanMouveWithPlayer = true;
                         m_BackToInitialPosition = false;
                         m_Pourcentage = 0;
                     }
-                    m_Pourcentage += 30f * Time.deltaTime;
                 }
             }
             

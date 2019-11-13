@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 10
   m_rigidBody: {fileID: 8675270820969509607}
-  m_BulletObjectCollideDestroyNameTag: Ennemy
+  m_BulletObjectCollideDestroyNameTag: Ignore Raycast
+  m_BulletObjectCollideDestroyNameTag2: Ennemy
 --- !u!54 &8675270820969509607
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -14,11 +14,12 @@ public class EnnemisController : MonoBehaviour
     public bool m_CanMove;
 
     private Vector3 m_StartingPos;
-    private float m_Distance;
+    private Rigidbody m_Rb;
     private int index;
     private float m_Pourcentage;
     private float timer;
     private Transform m_TransformTarget;
+    
     
     
 
@@ -29,6 +30,7 @@ public class EnnemisController : MonoBehaviour
         m_Pourcentage = 0f;
         m_StartingPos = transform.position;
         m_PlayerDetected = false;
+        m_Rb = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -36,14 +38,15 @@ public class EnnemisController : MonoBehaviour
     {
         if (!m_PlayerDetected)
         {
-            if(m_NoeudPartrouille.Count != 0)
+            m_Rb.velocity = Vector3.zero;
+            if (m_NoeudPartrouille.Count != 0)
             {
                 //m_Distance = Vector3.Distance(transform.position, m_NoeudPartrouille[index].transform.position);
                 transform.position = Vector3.Lerp(m_StartingPos, m_NoeudPartrouille[index].transform.position, m_Pourcentage);
                 if (m_Pourcentage >= 1)
                 {
                     index++;
-                    m_Pourcentage = 0;
+                    m_Pourcentage = 0f;
                     m_StartingPos = transform.position;
                 }
                 if (index >= m_NoeudPartrouille.Count)
@@ -58,28 +61,13 @@ public class EnnemisController : MonoBehaviour
         {
             timer += Time.deltaTime;
             transform.LookAt(m_TransformTarget);
+            m_Rb.velocity = transform.forward * m_Speed * 10f;
             if (timer > m_WaitingTimeShoot)
             {
                 GameObject projectileGameObject = GameObject.Instantiate(m_balleEnnemy, transform.position  + Vector3.forward, Quaternion.identity);
                 projectileGameObject.transform.rotation = transform.rotation;
                 projectileGameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
-                timer = 0;
-            }
-            if(m_CanMove)
-            {
-                float distance = Vector3.Distance(m_StartingPos, m_TransformTarget.position);
-                transform.position = Vector3.Lerp(m_StartingPos, m_TransformTarget.position, m_Pourcentage / distance);
-                if (m_Pourcentage >= 1)
-                {
-                    index++;
-                    m_Pourcentage = 0;
-                    m_StartingPos = transform.position;
-                }
-                if (index >= m_NoeudPartrouille.Count)
-                {
-                    index = 0;
-                }
-                m_Pourcentage += m_Speed * Time.deltaTime; //Permet de rendre constant le pourcentage
+                timer = 0f;
             }
         }
     }

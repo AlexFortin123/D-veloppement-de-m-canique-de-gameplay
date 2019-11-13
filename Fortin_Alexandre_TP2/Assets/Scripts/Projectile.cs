@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public float m_Speed;
     public Rigidbody m_rigidBody;
     public string m_BulletObjectCollideDestroyNameTag;
+    public string m_BulletObjectCollideDestroyNameTag2;
 
     private Camera m_Camera;
     private float m_TimerBeforeDissapear;
@@ -30,7 +31,7 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == m_BulletObjectCollideDestroyNameTag)
+        if(collision.gameObject.tag == m_BulletObjectCollideDestroyNameTag || collision.gameObject.tag == m_BulletObjectCollideDestroyNameTag2)
         {
             Destroy(gameObject);
         }

@@ -59,6 +59,10 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene(scene.name);
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(scene.name);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
