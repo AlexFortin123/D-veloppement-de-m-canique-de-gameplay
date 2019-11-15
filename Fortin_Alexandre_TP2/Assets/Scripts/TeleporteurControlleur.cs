@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Script qui permet au joueur de se téléporter d'un téléporteur a un autre
+ */
+
 public class TeleporteurControlleur : MonoBehaviour
 {
     public GameObject m_Player;

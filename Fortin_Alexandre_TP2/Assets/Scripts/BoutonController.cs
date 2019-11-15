@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*Script qui permet d'activé le totem avec lequel le boutton est enfants
+ * sa envoie un signal au Totem pour qu'il s'active lors de la collision
+ * entre le joueur et le boutton
+ */
 public class BoutonController : MonoBehaviour
 {
     public TotemControlleur m_TotemControlleur;
@@ -17,7 +20,6 @@ public class BoutonController : MonoBehaviour
         {
             m_TotemControlleur.m_Activated = true;
             Destroy(gameObject);
-            //Destroy(gameObject.GetComponent<CapsuleCollider>());
         }
     }
 }

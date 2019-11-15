@@ -13,6 +13,8 @@ TagManager:
   - Totem
   - MinimapCamera
   - Fin
+  - Porte
+  - Heal
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - Bullet
   - Player
   - Ennemy
-  - 
+  - Wall
   - Porte
   - Levier
   - EnnemyDetection

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Scripts qui définie le comportement de mes ennemis dans le jeu
+ */
 public class EnnemisController : MonoBehaviour
 {
     public int m_Hp;
@@ -34,8 +36,11 @@ public class EnnemisController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //le premier if interdit au ennemis de bouger ou attaquer tant que ma caméra fait ses 2 lerps
         if (m_CameraFellow.m_OtherCanMove)
         {
+            //tant et aussi longtemps que mon joueur n'est pas repérer, mon ennmis fait sa patrouille, si sa liste de NoeudPatrouille est vide
+            //l'ennemis ne fait rien
             if (!m_PlayerDetected)
             {
                 m_Rb.velocity = Vector3.zero;
@@ -59,6 +64,7 @@ public class EnnemisController : MonoBehaviour
             }
             else
             {
+                //Si le joueur est repérer, l'ennemis le poursuit et a intervall régulier, il se met à tirer
                 timer += Time.deltaTime;
                 transform.LookAt(m_TransformTarget);
                 m_Rb.velocity = transform.forward * m_Speed * 10f;
@@ -75,6 +81,7 @@ public class EnnemisController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        //Si l'ennemis est touché par une ball (Bullet), il perd des pv, si il est a zero il meurt
         if(collision.gameObject.tag == "Bullet")
         {
             m_Hp--;
@@ -85,7 +92,7 @@ public class EnnemisController : MonoBehaviour
         }
         
     }
-    //
+    //Recois la position du joueur et le stock dans m_TransformTarget
     public void ManageTargetTransform(Transform aTransformTarget)
     {
         m_TransformTarget = aTransformTarget;
