@@ -19,10 +19,7 @@ public class EnnemisController : MonoBehaviour
     private float m_Pourcentage;
     private float timer;
     private Transform m_TransformTarget;
-    
-    
-    
-
+    private CameraFollow m_CameraFellow;
 
     private void Awake()
     {
@@ -31,45 +28,50 @@ public class EnnemisController : MonoBehaviour
         m_StartingPos = transform.position;
         m_PlayerDetected = false;
         m_Rb = gameObject.GetComponent<Rigidbody>();
+        m_CameraFellow = Camera.main.GetComponent<CameraFollow>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!m_PlayerDetected)
+        if (m_CameraFellow.m_OtherCanMove)
         {
-            m_Rb.velocity = Vector3.zero;
-            if (m_NoeudPartrouille.Count != 0)
+            if (!m_PlayerDetected)
             {
-                //m_Distance = Vector3.Distance(transform.position, m_NoeudPartrouille[index].transform.position);
-                transform.position = Vector3.Lerp(m_StartingPos, m_NoeudPartrouille[index].transform.position, m_Pourcentage);
-                if (m_Pourcentage >= 1)
+                m_Rb.velocity = Vector3.zero;
+                if (m_NoeudPartrouille.Count != 0)
                 {
-                    index++;
-                    m_Pourcentage = 0f;
-                    m_StartingPos = transform.position;
+                    //m_Distance = Vector3.Distance(transform.position, m_NoeudPartrouille[index].transform.position);
+                    transform.position = Vector3.Lerp(m_StartingPos, m_NoeudPartrouille[index].transform.position, m_Pourcentage);
+                    if (m_Pourcentage >= 1)
+                    {
+                        index++;
+                        m_Pourcentage = 0f;
+                        m_StartingPos = transform.position;
+                    }
+                    if (index >= m_NoeudPartrouille.Count)
+                    {
+                        index = 0;
+                    }
+                    m_Pourcentage += m_Speed * Time.deltaTime; //Permet de rendre constant le pourcentage
                 }
-                if (index >= m_NoeudPartrouille.Count)
-                {
-                    index = 0;
-                }
-                m_Pourcentage += m_Speed * Time.deltaTime; //Permet de rendre constant le pourcentage
+
             }
-            
-        }
-        else
-        {
-            timer += Time.deltaTime;
-            transform.LookAt(m_TransformTarget);
-            m_Rb.velocity = transform.forward * m_Speed * 10f;
-            if (timer > m_WaitingTimeShoot)
+            else
             {
-                GameObject projectileGameObject = GameObject.Instantiate(m_balleEnnemy, transform.position  + Vector3.forward, Quaternion.identity);
-                projectileGameObject.transform.rotation = transform.rotation;
-                projectileGameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
-                timer = 0f;
+                timer += Time.deltaTime;
+                transform.LookAt(m_TransformTarget);
+                m_Rb.velocity = transform.forward * m_Speed * 10f;
+                if (timer > m_WaitingTimeShoot)
+                {
+                    GameObject projectileGameObject = GameObject.Instantiate(m_balleEnnemy, transform.position + Vector3.forward, Quaternion.identity);
+                    projectileGameObject.transform.rotation = transform.rotation;
+                    projectileGameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f);
+                    timer = 0f;
+                }
             }
         }
+        
     }
     private void OnCollisionEnter(Collision collision)
     {

@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour
     public Transform m_NewTranformCinematic;
     public Transform m_InitialPositionCamera;
     public bool m_CanMouveWithPlayer;
+    public bool m_OtherCanMove;
 
     private Vector3 m_NewPos;
     private Vector3 m_PositionPlayer;
@@ -26,6 +27,7 @@ public class CameraFollow : MonoBehaviour
         m_Pourcentage = 0f;
         m_BackToInitialPosition = false;
         m_QuaternionInitialCamera = transform.rotation;
+        m_OtherCanMove = true;
     }
     void Update()
     {
@@ -49,6 +51,7 @@ public class CameraFollow : MonoBehaviour
             {
                 if(!m_BackToInitialPosition)
                 {
+                    m_OtherCanMove = false; // empeche les ennemy et le joueur de bouger pendant le mouvement de camera
                     transform.position = Vector3.Lerp(m_InitialPositionCamera.position, m_NewTranformCinematic.position, m_Pourcentage);
                     transform.rotation = Quaternion.Lerp(m_InitialPositionCamera.rotation, m_NewTranformCinematic.rotation, m_Pourcentage);
                     m_Pourcentage += 0.3f * Time.deltaTime;
@@ -69,6 +72,7 @@ public class CameraFollow : MonoBehaviour
                     {
                         m_CanMouveWithPlayer = true;
                         m_BackToInitialPosition = false;
+                        m_OtherCanMove = true; // permet au joueur et au ennemy de se remettre à bouger
                         m_Pourcentage = 0;
                     }
                 }

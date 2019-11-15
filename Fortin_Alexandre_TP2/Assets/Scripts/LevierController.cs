@@ -21,10 +21,6 @@ public class LevierController : MonoBehaviour
 
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }
 
     IEnumerator CloseDoor()
     {

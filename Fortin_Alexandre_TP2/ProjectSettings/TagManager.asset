@@ -12,6 +12,7 @@ TagManager:
   - Bullet_Ennemy
   - Totem
   - MinimapCamera
+  - Fin
   layers:
   - Default
   - TransparentFX
