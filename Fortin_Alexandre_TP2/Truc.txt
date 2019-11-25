@@ -1,0 +1,6 @@
+Pas besoin de vérifier toutes les frames les points de vie, score(on check quand la varaible change)
+GameplayManager utile, le chest n'est pas censé savoir la porte, les coffres. Responsabilisé les objets
+Les layers ont les modifies dans Edit Layers, et on vérifie avec les tags
+Un seul Canvas, qui contient plusisuer screen. Main menu dans une autre scene (ScreenPlayOverlay si on veut pas le message)
+TimeScale pour arrêter le jeu pendant que le pause menu est activé
+Utilisé plus de fonction
