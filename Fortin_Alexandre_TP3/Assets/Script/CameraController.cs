@@ -12,10 +12,10 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        m_MouseMoveX = Input.GetAxis("Mouse X");//Prend en parametre le mouvement de la camera en X
-        m_MouseMoveY = -Input.GetAxis("Mouse Y");//Prend en parametre le mouvement de la camera en Y
+        m_MouseMoveX = Input.GetAxis("Mouse X");//Prend en parametre le mouvement de la camera en X par rapport à la position de la souris
+        m_MouseMoveY = -Input.GetAxis("Mouse Y");//Prend en parametre le mouvement de la camera en Y par rapport à la position de la souris
 
-        m_MouseMoveY = Mathf.Clamp(m_MouseMoveY, -30f, 30f);
+        //m_MouseMoveY = Mathf.Clamp(m_MouseMoveY, -30f, 30f);
         transform.Rotate(Vector3.right, m_MouseMoveY * Time.deltaTime * 100f);
         m_CanvasCameraTransform.Rotate(Vector3.up, m_MouseMoveX * Time.deltaTime * 100f);
         

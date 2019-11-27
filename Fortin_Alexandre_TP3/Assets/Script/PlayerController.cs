@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
     public Vector3 m_NewScaleShrinkPlayer;
     public Rigidbody m_RigidbodyPlayer;
     public GameObject m_ClonePlayer;
+    public bool m_CanDestroyClones;
 
     private Vector3 m_VelocityPlayer;
     private Vector3 m_ScalePlayerDefault;
     private float m_SpeedMouvementPlayerDefault;
     private float m_JumpForcePlayerDefault;
+    private RaycastHit m_Hit;
 
     private void Awake()
     {
@@ -22,31 +24,17 @@ public class PlayerController : MonoBehaviour
         m_SpeedMouvementPlayerDefault = m_SpeedMouvementPlayer;
         m_JumpForcePlayerDefault = m_JumpForcePlayer;
         m_ScalePlayerDefault = transform.localScale;
+        m_CanDestroyClones = false;
     }
-    // Update is called once per frame
+
     void Update()
     {
-        m_VelocityPlayer = m_RigidbodyPlayer.velocity;
-        if (Input.GetKey(KeyCode.W))
-        {
-            m_VelocityPlayer = transform.forward * m_SpeedMouvementPlayer;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            m_VelocityPlayer = transform.forward * -m_SpeedMouvementPlayer;
-        }
-        else
-        {
-            m_VelocityPlayer = Vector3.zero;
-        }
-        m_RigidbodyPlayer.velocity = m_VelocityPlayer;
+        Mouvement();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            m_RigidbodyPlayer.AddForce(0 , m_JumpForcePlayer, 0);
-        }
+        Jump();
         
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "ResetButton")
@@ -62,24 +50,72 @@ public class PlayerController : MonoBehaviour
             Shrink();
         }
     }
+
     public void SetJumpForce()
     {
         m_JumpForcePlayer *= 2f;
     }
+
     public void ResetPlayerStat()
     {
         m_SpeedMouvementPlayer = m_SpeedMouvementPlayerDefault;
         m_JumpForcePlayer = m_JumpForcePlayerDefault;
         transform.localScale = m_ScalePlayerDefault;
+        m_CanDestroyClones = true;
+        
     }
+
     public void CreateClonePlayer()
     {
         GameObject ClonePlayer = GameObject.Instantiate(m_ClonePlayer, transform.position + transform.forward * 2f, Quaternion.identity);
-        ClonePlayer.GetComponent<PlayerCloneController>().m_Player = gameObject;
-        //ClonePlayer.GetComponent<PlayerController>().enabled = false;
+        ClonePlayer.GetComponent<PlayerCloneController>().SetPlayer(this);
     }
+
     public void Shrink()
     {
         transform.localScale = m_NewScaleShrinkPlayer;
+    }
+
+    private void Mouvement()
+    {
+        //Reset la valeur de x,y,z pour remettre mon vecteur a zero ainsi réinitialiser mon vecteur a zero
+        m_VelocityPlayer.x = 0f;
+        m_VelocityPlayer.z = 0f;
+        m_VelocityPlayer.y = 0f;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            m_VelocityPlayer += -transform.right;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            m_VelocityPlayer += transform.right;
+        }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            m_VelocityPlayer += transform.forward;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            m_VelocityPlayer += -transform.forward;
+        }
+
+        m_VelocityPlayer.Normalize(); //permet de mettre la valeur égale dans toutes les directions
+        m_VelocityPlayer *= m_SpeedMouvementPlayer;
+        m_VelocityPlayer.y = m_RigidbodyPlayer.velocity.y; // pour éviter de toujours reset la velocity en y, il faut qu'elle soit égale a celle du rigidbody
+
+        m_RigidbodyPlayer.velocity = m_VelocityPlayer;
+    }
+
+    private void Jump()
+    {
+        LayerMask mask_Floor = LayerMask.GetMask("Floor");
+        if ((Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out m_Hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space)) ||
+            Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_Hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space) ||
+            Physics.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_Hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
+        {
+            m_RigidbodyPlayer.AddForce(0, m_JumpForcePlayer, 0);
+        }
     }
 }

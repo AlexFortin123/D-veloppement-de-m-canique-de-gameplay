@@ -108,7 +108,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &3173374249425791320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,5 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpeedMouvementPlayer: 10
-  m_JumpForcePlayer: 1000
+  m_JumpForcePlayer: 200
+  m_NewScaleShrinkPlayer: {x: 0.5, y: 0.5, z: 0.5}
   m_RigidbodyPlayer: {fileID: 3173374249425791319}
+  m_ClonePlayer: {fileID: 1832305122544705729, guid: 00786965af2c85040860598be031e73c,
+    type: 3}

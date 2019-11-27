@@ -7,6 +7,8 @@ TagManager:
   - ResetButton
   - CloneButton
   - ShrinkButton
+  - Floor
+  - ClonePlayer
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - 
   - PostProcessing
   - Player
-  - 
-  - 
+  - ClonePlayer
+  - Floor
   - 
   - 
   - 
