@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody m_RigidbodyPlayer;
     public GameObject m_ClonePlayer;
     public bool m_CanDestroyClones;
+    public GameManager m_GameManager;
 
     private Vector3 m_VelocityPlayer;
     private Vector3 m_ScalePlayerDefault;
@@ -40,14 +41,22 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "ResetButton")
         {
             ResetPlayerStat();
+            m_GameManager.ResetButtonActivated();
         }
         if(other.gameObject.tag == "CloneButton")
         {
             CreateClonePlayer();
+            m_GameManager.CloneButtonActivated();
         }
         if(other.gameObject.tag == "ShrinkButton")
         {
             Shrink();
+            m_GameManager.ShrinkButtonActivated();
+        }
+        if(other.gameObject.tag == "RocketJump")
+        {
+            SetJumpForce();
+            m_GameManager.RocketJumpActivated();
         }
     }
 
@@ -118,4 +127,5 @@ public class PlayerController : MonoBehaviour
             m_RigidbodyPlayer.AddForce(0, m_JumpForcePlayer, 0);
         }
     }
+
 }

@@ -16,7 +16,7 @@ public class PlayerCloneController : MonoBehaviour
     {
         m_ClonePlayerRigidbody = GetComponent<Rigidbody>();
     }
-    // Update is called once per frame
+
     void Update()
     {
         MouvementClone();
