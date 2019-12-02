@@ -10,6 +10,7 @@ TagManager:
   - Floor
   - ClonePlayer
   - RocketJump
+  - DoubleSpeed
   layers:
   - Default
   - TransparentFX

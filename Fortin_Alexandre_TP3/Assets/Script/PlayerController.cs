@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
             SetJumpForce();
             m_GameManager.RocketJumpActivated();
         }
+        if(other.gameObject.tag == "DoubleSpeed")
+        {
+            DoubleSpeed();
+            m_GameManager.DoubleSpeedButtonActivated();
+        }
     }
 
     public void SetJumpForce()
@@ -126,6 +131,11 @@ public class PlayerController : MonoBehaviour
         {
             m_RigidbodyPlayer.AddForce(0, m_JumpForcePlayer, 0);
         }
+    }
+
+    private void DoubleSpeed()
+    {
+        m_SpeedMouvementPlayer *= 2f;
     }
 
 }
