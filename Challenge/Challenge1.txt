@@ -1,0 +1,5 @@
+CHAQUE CHALLENGE DEMANDE UN SEUL SCRIPT SUR UN SEUL OBJET
+
+Les déplacements doivent utiliser la physique et chaque challenge doit avoir leur propre script. 
+
+Faire un cube qui se déplace avec les input du joueur, et change de couleur lorsqu’on appuie sur Spacebar.

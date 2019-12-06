@@ -31,8 +31,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Mouvement();
-
-        Jump();
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
         
     }
 
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviour
             m_GameManager.DoubleSpeedButtonActivated();
         }
     }
-
+ 
     public void SetJumpForce()
     {
         m_JumpForcePlayer *= 2f;
@@ -125,9 +127,9 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         LayerMask mask_Floor = LayerMask.GetMask("Floor");
-        if ((Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out m_Hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space)) ||
-            Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_Hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space) ||
-            Physics.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_Hit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
+        if (Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out m_Hit, 0.6f, mask_Floor) ||
+            Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_Hit, 0.6f, mask_Floor) ||
+            Physics.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_Hit, 0.6f, mask_Floor))
         {
             m_RigidbodyPlayer.AddForce(0, m_JumpForcePlayer, 0);
         }

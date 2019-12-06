@@ -1,0 +1,6 @@
+CHAQUE CHALLENGE DEMANDE UN SEUL SCRIPT SUR UN SEUL OBJET
+
+Les déplacements doivent utiliser la physique et chaque challenge doit avoir leur propre script. 
+
+Faire que lorsque votre cube touche un autre objet et que vous maintenez une touche de votre choix appuyer, 
+cet objet ce parente à votre cube jusqu’à ce que vous relâchez le bouton.

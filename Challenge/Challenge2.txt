@@ -1,0 +1,5 @@
+CHAQUE CHALLENGE DEMANDE UN SEUL SCRIPT SUR UN SEUL OBJET
+
+Les déplacements doivent utiliser la physique et chaque challenge doit avoir leur propre script. 
+
+Faire en sorte que lorsque le cube touche un autre objet, l’autre objet change de couleur.
