@@ -39,7 +39,6 @@ public class PlayerCloneController : MonoBehaviour
     {
         transform.rotation = m_PlayerController.transform.rotation;
         m_SpeedMouvementClonePlayer = m_PlayerController.m_SpeedMouvementPlayer;
-        //m_JumpForceClonePlayer = m_PlayerController.m_JumpForcePlayer;
         transform.localScale = m_PlayerController.transform.localScale;
 
         //Reset la valeur de x,y,z pour remettre mon vecteur a zero ainsi réinitialiser mon vecteur a zero
@@ -49,11 +48,11 @@ public class PlayerCloneController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            m_VelocityClonePlayer += -transform.right;
+            m_VelocityClonePlayer += transform.right;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            m_VelocityClonePlayer += transform.right;
+            m_VelocityClonePlayer += -transform.right;
         }
 
         if (Input.GetKey(KeyCode.W))
@@ -77,8 +76,8 @@ public class PlayerCloneController : MonoBehaviour
         m_JumpForceClonePlayer = m_PlayerController.m_JumpForcePlayer;
         LayerMask mask_Floor = LayerMask.GetMask("Floor");
         if ((Physics.Raycast(transform.position, new Vector3(0f, -1f, 0f), out m_CloneHit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space)) ||
-            Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_CloneHit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space) ||
-            Physics.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_CloneHit, 0.5f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
+            Physics.Raycast(new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_CloneHit, 0.6f, mask_Floor) && Input.GetKeyDown(KeyCode.Space) ||
+            Physics.Raycast(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), new Vector3(0f, -1f, 0f), out m_CloneHit, 0.6f, mask_Floor) && Input.GetKeyDown(KeyCode.Space))
         {
             m_ClonePlayerRigidbody.AddForce(0, m_JumpForceClonePlayer, 0);
         }

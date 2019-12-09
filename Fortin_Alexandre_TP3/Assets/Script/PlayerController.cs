@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.tag == "CloneButton")
         {
-            CreateClonePlayer();
+            CreateClonePlayer(other.gameObject.transform.GetChild(2).transform);
             m_GameManager.CloneButtonActivated();
         }
         if(other.gameObject.tag == "ShrinkButton")
@@ -81,9 +81,9 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void CreateClonePlayer()
+    public void CreateClonePlayer(Transform i_SpawnTransform)
     {
-        GameObject ClonePlayer = GameObject.Instantiate(m_ClonePlayer, transform.position + transform.forward * 2f, Quaternion.identity);
+        GameObject ClonePlayer = GameObject.Instantiate(m_ClonePlayer, i_SpawnTransform.position, Quaternion.identity);
         ClonePlayer.GetComponent<PlayerCloneController>().SetPlayer(this);
     }
 

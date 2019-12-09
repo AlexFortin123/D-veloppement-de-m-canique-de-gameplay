@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Image m_ImageShrink;
     public Image m_ImageClone;
     public Image m_ImageDoubleSpeed;
+    //public GameObject m_Porte;
 
     public void RocketJumpActivated()
     {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         }
         m_ImageRocketJump.enabled = true;
     }
+
     public void ShrinkButtonActivated()
     {
         for (int i = 0; i < m_ListShrinkButton.Count; i++)
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         }
         m_ImageShrink.enabled = true;
     }
+
     public void CloneButtonActivated()
     {
         for (int i = 0; i < m_ListCloneButton.Count; i++)
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         }
         m_ImageClone.enabled = true;
     }
+
     public void DoubleSpeedButtonActivated()
     {
         for (int i = 0; i < m_ListDoubleSpeedButton.Count; i++)
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
         }
         m_ImageDoubleSpeed.enabled = true;
     }
+
     public void ResetButtonActivated()
     {
         for (int i = 0; i < m_ListRocketJumpButton.Count; i++)
