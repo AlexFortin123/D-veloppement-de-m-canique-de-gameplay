@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,21 @@ public class GameManager : MonoBehaviour
     public Image m_ImageShrink;
     public Image m_ImageClone;
     public Image m_ImageDoubleSpeed;
-    //public GameObject m_Porte;
+
+    private Scene scene;
+
+    private void Awake()
+    {
+        scene = SceneManager.GetActiveScene();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(scene.name);
+        }
+    }
 
     public void RocketJumpActivated()
     {

@@ -11,6 +11,8 @@ TagManager:
   - ClonePlayer
   - RocketJump
   - DoubleSpeed
+  - Wall
+  - MovingPlateforme
   layers:
   - Default
   - TransparentFX

@@ -19,9 +19,7 @@ public class DoorControlleur : MonoBehaviour
     private void Update()
     {
         m_CanOpenDoor1 = m_ButtonController1.GetCanOpenDoor();
-        Debug.Log("m_CanOpenDoor1" + m_CanOpenDoor1);
         m_CanOpenDoor2 = m_ButtonController2.GetCanOpenDoor();
-        Debug.Log("m_CanOpenDoor2" + m_CanOpenDoor2);
         if (m_CanOpenDoor1 && m_CanOpenDoor2)
         {
             StartCoroutine("CloseDoor");

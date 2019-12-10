@@ -19,6 +19,14 @@ public class ButtonController : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player" || other.tag == "ClonePlayer")
+        {
+            m_CanOpenDoor = false;
+        }
+    }
+
     public bool GetCanOpenDoor()
     {
         return m_CanOpenDoor;

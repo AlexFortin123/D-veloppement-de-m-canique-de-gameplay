@@ -65,8 +65,28 @@ public class PlayerController : MonoBehaviour
             DoubleSpeed();
             m_GameManager.DoubleSpeedButtonActivated();
         }
+        if(other.gameObject.tag == "MovingPlateforme")
+        {
+            transform.parent = other.transform;
+        }
     }
- 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "MovingPlateforme")
+        {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "MovingPlateforme")
+        {
+            transform.parent = null;
+        }
+    }
+
     public void SetJumpForce()
     {
         m_JumpForcePlayer *= 2f;
