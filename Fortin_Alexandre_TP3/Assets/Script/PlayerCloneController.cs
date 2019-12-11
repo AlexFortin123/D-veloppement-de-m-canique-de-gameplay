@@ -46,20 +46,20 @@ public class PlayerCloneController : MonoBehaviour
         m_VelocityClonePlayer.z = 0f;
         m_VelocityClonePlayer.y = 0f;
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             m_VelocityClonePlayer += transform.right;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             m_VelocityClonePlayer += -transform.right;
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             m_VelocityClonePlayer += transform.forward;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             m_VelocityClonePlayer += -transform.forward;
         }
